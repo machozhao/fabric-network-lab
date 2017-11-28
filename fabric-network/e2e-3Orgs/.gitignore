@@ -1,0 +1,4 @@
+channel/*.tx
+channel/*.block
+channel/crypto-config
+tls/*
