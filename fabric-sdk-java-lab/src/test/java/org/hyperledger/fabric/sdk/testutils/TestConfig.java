@@ -117,12 +117,12 @@ public class TestConfig {
             defaultProperty(INTEGRATIONTESTS_ORG + "peerOrg2.eventhub_locations", "peer0.org2.example.com@grpc://localhost:8053, peer1.org2.example.com@grpc://localhost:8058");
 
             // Org3
-            defaultProperty(INTEGRATIONTESTS_ORG + "peerOrg2.mspid", "Org3MSP");
-            defaultProperty(INTEGRATIONTESTS_ORG + "peerOrg2.domname", "org3.example.com");
-            defaultProperty(INTEGRATIONTESTS_ORG + "peerOrg2.ca_location", "http://localhost:9054");
-            defaultProperty(INTEGRATIONTESTS_ORG + "peerOrg2.peer_locations", "peer0.org3.example.com@grpc://localhost:9051,peer1.org3.example.com@grpc://localhost:9056");
-            defaultProperty(INTEGRATIONTESTS_ORG + "peerOrg2.orderer_locations", "orderer.example.com@grpc://localhost:7050");
-            defaultProperty(INTEGRATIONTESTS_ORG + "peerOrg2.eventhub_locations", "peer0.org3.example.com@grpc://localhost:9053, peer1.org3.example.com@grpc://localhost:9058");
+            defaultProperty(INTEGRATIONTESTS_ORG + "peerOrg3.mspid", "Org3MSP");
+            defaultProperty(INTEGRATIONTESTS_ORG + "peerOrg3.domname", "org3.example.com");
+            defaultProperty(INTEGRATIONTESTS_ORG + "peerOrg3.ca_location", "http://localhost:9054");
+            defaultProperty(INTEGRATIONTESTS_ORG + "peerOrg3.peer_locations", "peer0.org3.example.com@grpc://localhost:9051,peer1.org3.example.com@grpc://localhost:9056");
+            defaultProperty(INTEGRATIONTESTS_ORG + "peerOrg3.orderer_locations", "orderer.example.com@grpc://localhost:7050");
+            defaultProperty(INTEGRATIONTESTS_ORG + "peerOrg3.eventhub_locations", "peer0.org3.example.com@grpc://localhost:9053, peer1.org3.example.com@grpc://localhost:9058");
 
             defaultProperty(INTEGRATIONTESTSTLS, null);
             runningTLS = null != sdkProperties.getProperty(INTEGRATIONTESTSTLS, null);
