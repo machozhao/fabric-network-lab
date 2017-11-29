@@ -1,0 +1,66 @@
+#
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+version: '2'
+
+services:
+  ca3:
+    image: hyperledger/fabric-ca${IMAGE_TAG_FABRIC_CA}
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+    ports:
+      - "9054:7054"
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org3.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/c0fd331d391ae15b5f15ce43f64f3d4aa73fe8ea9de0339a5420acdf2e154dfe_sk -b admin:adminpw ${ORG_HYPERLEDGER_FABRIC_SDKTEST_INTEGRATIONTESTS_CA_TLS} --tls.certfile /etc/hyperledger/fabric-ca-server-config/ca.org3.example.com-cert.pem --tls.keyfile /etc/hyperledger/fabric-ca-server-config/c0fd331d391ae15b5f15ce43f64f3d4aa73fe8ea9de0339a5420acdf2e154dfe_sk -d'
+    volumes:
+      - ./channel/crypto-config/peerOrganizations/org3.example.com/ca/:/etc/hyperledger/fabric-ca-server-config:rw
+    container_name: ca_peerOrg3
+
+  peer0.org3.example.com:
+    container_name: peer0.org3.example.com
+    extends:
+      file: peer-base/peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.org3.example.com
+      - CORE_PEER_ADDRESS=peer0.org3.example.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org3.example.com:9051
+#      - CORE_PEER_GOSSIP_ORGLEADER=true
+      - CORE_PEER_LOCALMSPID=Org3MSP
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./channel/crypto-config/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/:/etc/hyperledger/msp/peer:ro
+    ports:
+      - 9051:7051
+      - 9053:7053
+
+  peer1.org3.example.com:
+    container_name: peer1.org3.example.com
+    extends:
+      file: peer-base/peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.org3.example.com
+      - CORE_PEER_ADDRESS=peer1.org3.example.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org3.example.com:9056
+#      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org3.example.com:9051
+      - CORE_PEER_LOCALMSPID=Org3MSP
+    volumes:
+         - /var/run/:/host/var/run/
+         - ./channel/crypto-config/peerOrganizations/org3.example.com/peers/peer1.org3.example.com/:/etc/hyperledger/msp/peer:ro
+    ports:
+       - 9056:7051
+       - 9058:7053
+    depends_on:
+       - peer0.org3.example.com
+
+  configtxlator:
+      image: hyperledger/fabric-tools${IMAGE_TAG_FABRIC}
+      ports:
+        - "7059:7059"
+      command: /usr/local/bin/configtxlator start
+      container_name: configtxlator
+
+  ccenv:
+    image: hyperledger/fabric-ccenv${IMAGE_TAG_FABRIC}
