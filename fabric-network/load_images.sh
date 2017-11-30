@@ -7,3 +7,4 @@ docker  load < hyperledger/fabric-orderer_x86_64-1.0.4.tar
 docker  load < hyperledger/fabric-peer_x86_64-1.0.4.tar
 docker  load < hyperledger/fabric-javaenv_x86_64-1.0.4.tar
 docker  load < hyperledger/fabric-ccenv_x86_64-1.0.4.tar
+docker  load < hyperledger/fabric-baseos_x86_64-0.3.2.tar
