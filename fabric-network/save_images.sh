@@ -9,4 +9,4 @@ docker  save hyperledger/fabric-orderer:x86_64-1.0.4 > hyperledger/fabric-ordere
 docker  save hyperledger/fabric-peer:x86_64-1.0.4 > hyperledger/fabric-peer_x86_64-1.0.4.tar
 docker  save hyperledger/fabric-javaenv:x86_64-1.0.4 > hyperledger/fabric-javaenv_x86_64-1.0.4.tar
 docker  save hyperledger/fabric-ccenv:x86_64-1.0.4 > hyperledger/fabric-ccenv_x86_64-1.0.4.tar
-
+docker save hyperledger/fabric-baseos:x86_64-0.3.2 > hyperledger/fabric-baseos_x86_64-0.3.2.tar
